@@ -17,9 +17,6 @@ jobs:
           name: "Run Hugo"
           command: HUGO_ENV=production hugo -v
       - run:
-          name: "Test Website"
-          command: htmlproofer ./publish --allow-hash-href --check-html --empty-alt-ignore --disable-external
-      - run:
           name: "Publish"
           command: |
               cd publish
