@@ -1,0 +1,16 @@
+#fh5co-about h3.aims {
+  font-weight: bold;
+  color: #225e9b;
+}
+
+#fh5co-about ul {
+  text-align: justify;
+}
+
+.fh5co-intro-icon.icon-paziresh {
+  background-image: url(/images/Paziresh_Login.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+  height: 93px;
+}

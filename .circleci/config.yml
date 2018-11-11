@@ -1,0 +1,30 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: felicianotech/docker-hugo:0.47.1
+    working_directory: ~/project
+    branches:
+      only:
+        - master
+    steps:
+      - checkout
+      - run: |
+          git submodule sync
+          git submodule update --init
+          cd publish && git checkout master && cd -
+      - run:
+          name: "Run Hugo"
+          command: HUGO_ENV=production hugo -v
+      - run:
+          name: "Test Website"
+          command: htmlproofer ./publish --allow-hash-href --check-html --empty-alt-ignore --disable-external
+      - run:
+          name: "Publish"
+          command: |
+              cd publish
+              git config user.email "${PERSONAL_EMAIL}"
+              git config user.name "CircleCI"
+              git add .
+              git commit -m "Update"
+              git push -q https://${PERSONAL_GITHUB_TOKEN}@github.com/mousavian/paziresh.co.git master
